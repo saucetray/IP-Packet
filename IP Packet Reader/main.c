@@ -17,9 +17,9 @@
 #define VERSION(version) ((0xF0 & version) >> 4);
 
 
-// main - parses the packet files
-// argc : the number of parameters
-// argv : the parameters
+/// main - parses the packet files
+/// param argc - the number of parameters
+/// param argv - the parameters
 int main(int argc, const char * argv[]) {
     int8_t byte;
     int8_t version;

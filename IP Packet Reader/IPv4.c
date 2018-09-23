@@ -8,6 +8,7 @@
 
 
 #include "IPv4.h"
+#include "protocol.h"
 
 #define IHL(ihl) (0x0F & ihl)
 #define FLAGS(byte) (0xE0 & byte) // (0x8000 & byte)
@@ -20,10 +21,10 @@
                                                protocol, number, number);
 
 
-// address_parser - parses the address into a integer array
-// param address - pointer to the address location
-// param buffer - the buffer with the binary to the packet
-// param i - the starting index for the buffer
+/// address_parser - parses the address into a integer array
+/// param address - pointer to the address location
+/// param buffer - the buffer with the binary to the packet
+/// param i - the starting index for the buffer
 static void address_parser(unsigned int *address, unsigned char *buffer, int i) {
     int index = 0;
     for (int j = i; j < i+4; j++) {
@@ -66,7 +67,7 @@ void print_IPv4_packet(IPv4_Packet *packet) {
     Print("Identification", packet->ID);
     Print("Flags", packet->Flags);
     Print("Fragment Offset", packet->fragment_off);
-    ProtocolPrint("TCP", packet->protocol);
+    ProtocolPrint(get_protocol(packet->protocol), packet->protocol);
     Print("Checksum", packet->checksum);
     AddressPrint("Source Address", packet->source_address)
     AddressPrint("Desination Address", packet->destination_addres);
