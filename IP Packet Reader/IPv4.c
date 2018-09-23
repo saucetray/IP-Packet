@@ -39,7 +39,7 @@ void create_IPv4_packet_file(IPv4_Packet *packet, FILE *file, int8_t ihl) {
     packet->IHL = IHL(ihl); // figure out the length of the header for iPv4.
     
     unsigned char buffer[packet->IHL * 4];
-    fread(buffer, sizeof(char), packet->IHL * 4, file);
+    fread(buffer, sizeof(char), packet->IHL * 4 - 1, file);
     
     packet->TOS = buffer[0];
     packet->TLength = (buffer[1] << 8) | buffer[2]; // total length of the packet including its payload.
@@ -53,13 +53,16 @@ void create_IPv4_packet_file(IPv4_Packet *packet, FILE *file, int8_t ihl) {
     packet->protocol = buffer[8]; // protocol
     packet->checksum = (buffer[9] << 8) | buffer[10];
     
+    // parses the addresses into the address space
     address_parser(packet->source_address, buffer, 11);
     address_parser(packet->destination_addres, buffer, 15);
 }
 
 
 void print_IPv4_packet(IPv4_Packet *packet) {
-    printf("=====> Packet\n");
+    static int number = 1;
+    printf("=====> Packet %i\n", number);
+    number++;
     Print("Version", packet->version);
     Print("Header Length", packet->IHL);
     Print("DSCP", packet->TOS);

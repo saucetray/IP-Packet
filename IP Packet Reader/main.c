@@ -35,23 +35,21 @@ int main(int argc, const char * argv[]) {
     
     for(int i = 1; i < argc; i++) {
         FILE *file = fopen(argv[i], "r");
-
-        fread(&byte, 1, 1, file);
-        version = VERSION(byte)
-    
-        // hand over to IPv4 or IPv6
-        if(version == 4) {
-            IPv4_Packet packet;
-            create_IPv4_packet_file(&packet, file, byte);
-            print_IPv4_packet(&packet);
-        } else if(version == 6) {
-            //IPv6
-        } else {
-            perror("This is not a packet. This program strictly takes packets.\n");
-            return 3;
+        while ((fread(&byte, 1, 1, file))) {
+            version = VERSION(byte)
+            // hand over to IPv4 or IPv6
+            if(version == 4) {
+                IPv4_Packet packet;
+                create_IPv4_packet_file(&packet, file, byte);
+                print_IPv4_packet(&packet);
+            } else if(version == 6) {
+                //IPv6
+            } else {
+                perror("This is not a packet. This program strictly takes packets.\n");
+                return 3;
+            }
         }
     }
-    
     return 0;
 }
 
