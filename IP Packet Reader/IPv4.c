@@ -12,6 +12,12 @@
 #define IHL(ihl) (0x0F & ihl)
 #define FLAGS(byte) (0xE0 & byte) // (0x8000 & byte)
 #define FRAG_OFFSET(byte) (printf("%i", 3));
+#define Print(identifier, number) printf("%s:\t\t0x%x (%d)\n", identifier, \
+                                         number, number);
+#define AddressPrint(identifier, addr) \
+                     printf("%s:\t\t%d.%d.%d.%d\n", identifier, addr[0], addr[1], addr[2], addr[3]);
+#define ProtocolPrint(protocol, number) printf("Protocol:\t\t%s 0x%x (%d)\n", \
+                                               protocol, number, number);
 
 
 // address_parser - parses the address into a integer array
@@ -50,4 +56,19 @@ void create_IPv4_packet_file(IPv4_Packet *packet, FILE *file, int8_t ihl) {
     address_parser(packet->destination_addres, buffer, 15);
 }
 
+
+void print_IPv4_packet(IPv4_Packet *packet) {
+    printf("=====> Packet\n");
+    Print("Version", packet->version);
+    Print("Header Length", packet->IHL);
+    Print("DSCP", packet->TOS);
+    Print("Total Length", packet->TLength);
+    Print("Identification", packet->ID);
+    Print("Flags", packet->Flags);
+    Print("Fragment Offset", packet->fragment_off);
+    ProtocolPrint("TCP", packet->protocol);
+    Print("Checksum", packet->checksum);
+    AddressPrint("Source Address", packet->source_address)
+    AddressPrint("Desination Address", packet->destination_addres);
+}
 

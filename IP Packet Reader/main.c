@@ -43,6 +43,7 @@ int main(int argc, const char * argv[]) {
         if(version == 4) {
             IPv4_Packet packet;
             create_IPv4_packet_file(&packet, file, byte);
+            print_IPv4_packet(&packet);
         } else if(version == 6) {
             //IPv6
         } else {
