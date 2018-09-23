@@ -23,7 +23,7 @@
 #include <stdlib.h>
 
 typedef struct {
-    unsigned int version: 4, IHL:4,
+    unsigned int version: 4, IHL: 4,
                  TOS: 8, TLength: 16, ID: 16,
                  Flags: 3, fragment_off: 13,
                  TTL: 8, protocol: 8, checksum: 16;
@@ -32,6 +32,10 @@ typedef struct {
 
 void print_IPv4_packet(IPv4_Packet packet);
 
+// create_IPv4_packet_file - parses the packet data into a IPv4_Packet struct
+// param packet - pointer to the packet struct
+// param file - pointer to the file
+// param ihl - the internet header length
 void create_IPv4_packet_file(IPv4_Packet *packet, FILE *file, int8_t version);
 
 #endif /* IPv4_h */
