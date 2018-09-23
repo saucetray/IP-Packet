@@ -5,7 +5,6 @@
 //  Created by Justin Sostre on 9/21/18.
 //  Copyright © 2018 Justin Sostre. All rights reserved.
 //
-
 //                                   IPv4 Packet Header Design
 //                                            Bits
 //        |0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
@@ -22,6 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// IPv4_Packet - struct that 
 typedef struct {
     unsigned int version: 4, IHL: 4,
                  TOS: 8, TLength: 16, ID: 16,
@@ -30,7 +30,9 @@ typedef struct {
     unsigned int source_address[4], destination_addres[4];
 } IPv4_Packet;
 
-void print_IPv4_packet(IPv4_Packet packet);
+// print_IPv4_packet - prints the IPv4 packet
+// param packet - pointer to the packet being printed.
+void print_IPv4_packet(IPv4_Packet *packet);
 
 // create_IPv4_packet_file - parses the packet data into a IPv4_Packet struct
 // param packet - pointer to the packet struct

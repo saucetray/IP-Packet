@@ -28,7 +28,6 @@ static void address_parser(unsigned int *address, unsigned char *buffer, int i) 
 
 
 void create_IPv4_packet_file(IPv4_Packet *packet, FILE *file, int8_t ihl) {
-    
     packet->version = 4;
     packet->IHL = IHL(ihl); // figure out the length of the header for iPv4.
     
