@@ -27,7 +27,7 @@ typedef struct {
                  TOS: 8, TLength: 16, ID: 16,
                  Flags: 3, fragment_off: 13,
                  TTL: 8, protocol: 8, checksum: 16;
-    unsigned int source_address: 32, destination_address: 32;
+    unsigned int source_address[4], destination_addres[4];
 } IPv4_Packet;
 
 void print_IPv4_packet(IPv4_Packet packet);
