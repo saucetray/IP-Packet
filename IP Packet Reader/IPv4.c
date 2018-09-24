@@ -13,12 +13,9 @@
 #define IHL(ihl) (0x0F & ihl)
 #define FLAGS(byte) (0xE0 & byte) // (0x8000 & byte)
 #define FRAG_OFFSET(byte) (printf("%i", 3));
-#define Print(identifier, number) printf("%s:\t\t0x%x (%d)\n", identifier, \
-                                         number, number);
 #define AddressPrint(identifier, addr) \
                      printf("%s:\t\t%d.%d.%d.%d\n", identifier, addr[0], addr[1], addr[2], addr[3]);
-#define ProtocolPrint(protocol, number) printf("Protocol:\t\t%s 0x%x (%d)\n", \
-                                               protocol, number, number);
+
 
 
 /// address_parser - parses the address into a integer array

@@ -47,7 +47,6 @@ int main(int argc, const char * argv[]) {
             } else if(version == 6) {
                 IPv6_Packet packet;
                 create_IPv6_packet(&packet, file, byte);
-                print_IPv6_packet(&packet);
             } else {
                 perror("This is not a packet. This program strictly takes packets.\n");
                 return 3;
