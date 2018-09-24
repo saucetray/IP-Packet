@@ -36,7 +36,7 @@ static void address_parser(unsigned int *address, unsigned char *buffer, int i) 
 
 void create_IPv4_packet_file(IPv4_Packet *packet, FILE *file, int8_t ihl) {
     packet->version = 4;
-    packet->IHL = IHL(ihl); // figure out the length of the header for iPv4.
+    packet->IHL = IHL(ihl); // figure out the length of the header for IPv4.
     
     unsigned char buffer[packet->IHL * 4];
     fread(buffer, sizeof(char), packet->IHL * 4 - 1, file);
@@ -60,9 +60,9 @@ void create_IPv4_packet_file(IPv4_Packet *packet, FILE *file, int8_t ihl) {
 
 
 void print_IPv4_packet(IPv4_Packet *packet) {
-    static int number = 1;
-    printf("=====> Packet %i\n", number);
+    static int number = 0;
     number++;
+    printf("=====> Packet %i : IPv%i\n", number, packet->version);
     Print("Version", packet->version);
     Print("Header Length", packet->IHL);
     Print("DSCP", packet->TOS);
