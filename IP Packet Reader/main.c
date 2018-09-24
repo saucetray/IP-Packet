@@ -12,6 +12,8 @@
 #include <string.h>
 #include <unistd.h>
 #include "IPv4.h"
+#include "IPv6.h"
+
 
 #define USAGE printf("./main [packet files]\n");
 #define VERSION(version) ((0xF0 & version) >> 4);
@@ -43,7 +45,9 @@ int main(int argc, const char * argv[]) {
                 create_IPv4_packet_file(&packet, file, byte);
                 print_IPv4_packet(&packet);
             } else if(version == 6) {
-                //IPv6
+                IPv6_Packet packet;
+                create_IPv6_packet(&packet, file, byte);
+                print_IPv6_packet(&packet);
             } else {
                 perror("This is not a packet. This program strictly takes packets.\n");
                 return 3;

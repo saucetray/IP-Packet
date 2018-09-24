@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		79800545215851040064F80B /* IPv6.c in Sources */ = {isa = PBXBuildFile; fileRef = 79800544215851040064F80B /* IPv6.c */; };
+		79A4B981215837CB005D26EE /* IPv4.c in Sources */ = {isa = PBXBuildFile; fileRef = 79A4B980215837CB005D26EE /* IPv4.c */; };
+		79A4B98421584171005D26EE /* protocol.c in Sources */ = {isa = PBXBuildFile; fileRef = 79A4B98321584171005D26EE /* protocol.c */; };
 		79D4C9122152E72700D058F6 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 79D4C9112152E72700D058F6 /* main.c */; };
 /* End PBXBuildFile section */
 
@@ -23,8 +26,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		79800543215851040064F80B /* IPv6.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPv6.h; sourceTree = "<group>"; };
+		79800544215851040064F80B /* IPv6.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = IPv6.c; sourceTree = "<group>"; };
+		79A4B980215837CB005D26EE /* IPv4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IPv4.c; sourceTree = "<group>"; };
+		79A4B98221584171005D26EE /* protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
+		79A4B98321584171005D26EE /* protocol.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = protocol.c; sourceTree = "<group>"; };
 		79D4C90E2152E72700D058F6 /* IP Packet Reader */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "IP Packet Reader"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D4C9112152E72700D058F6 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		79D4C91821556C3400D058F6 /* IPv4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPv4.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +66,13 @@
 		79D4C9102152E72700D058F6 /* IP Packet Reader */ = {
 			isa = PBXGroup;
 			children = (
+				79A4B980215837CB005D26EE /* IPv4.c */,
+				79A4B98221584171005D26EE /* protocol.h */,
+				79A4B98321584171005D26EE /* protocol.c */,
 				79D4C9112152E72700D058F6 /* main.c */,
+				79D4C91821556C3400D058F6 /* IPv4.h */,
+				79800543215851040064F80B /* IPv6.h */,
+				79800544215851040064F80B /* IPv6.c */,
 			);
 			path = "IP Packet Reader";
 			sourceTree = "<group>";
@@ -118,6 +133,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79800545215851040064F80B /* IPv6.c in Sources */,
+				79A4B98421584171005D26EE /* protocol.c in Sources */,
+				79A4B981215837CB005D26EE /* IPv4.c in Sources */,
 				79D4C9122152E72700D058F6 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

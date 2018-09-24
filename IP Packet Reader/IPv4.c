@@ -42,7 +42,7 @@ void create_IPv4_packet_file(IPv4_Packet *packet, FILE *file, int8_t ihl) {
     fread(buffer, sizeof(char), packet->IHL * 4 - 1, file);
     
     packet->TOS = buffer[0];
-    packet->TLength = (buffer[1] << 8) | buffer[2]; // total length of the packet including its payload.
+    packet->total_length = (buffer[1] << 8) | buffer[2]; // total length of the packet including its payload.
     packet->ID = (buffer[3] << 8) | buffer[4];
     
     // flags for fragmentation
@@ -66,7 +66,7 @@ void print_IPv4_packet(IPv4_Packet *packet) {
     Print("Version", packet->version);
     Print("Header Length", packet->IHL);
     Print("DSCP", packet->TOS);
-    Print("Total Length", packet->TLength);
+    Print("Total Length", packet->total_length);
     Print("Identification", packet->ID);
     Print("Flags", packet->Flags);
     Print("Fragment Offset", packet->fragment_off);
