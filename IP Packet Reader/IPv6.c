@@ -91,5 +91,14 @@ void create_IPv6_packet(IPv6_Packet *packet, FILE *file, int8_t byte) {
 }
 
 void print_IPv6_packet(IPv6_Packet *packet) {
-    
+    static int number = 0;
+    number++;
+    printf("=====> Packet %i : IPv%i\n", number, packet->version);
+    Print("Version", packet->version);
+    Print("Traffic Class", packet->traffic_class);
+    Print("Flow Label", packet->flow_label);
+    Print("Payload Length", packet->payload_length);
+    Print("Next Header", packet->next_header);
+    printf("Source Address\t\t%s", packet->source_string);
+    printf("Destination Address\t\t%s", packet->destination_string);
 }

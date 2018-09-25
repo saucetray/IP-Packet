@@ -13,7 +13,7 @@
 #define IHL(ihl) (0x0F & ihl)
 #define FLAGS(byte) (0xE0 & byte) // (0x8000 & byte)
 #define FRAG_OFFSET(byte) (printf("%i", 3));
-#define AddressPrint(identifier, addr) \
+#define IPv4AddressPrint(identifier, addr) \
                      printf("%s:\t\t%d.%d.%d.%d\n", identifier, addr[0], addr[1], addr[2], addr[3]);
 
 
@@ -69,7 +69,7 @@ void print_IPv4_packet(IPv4_Packet *packet) {
     Print("Fragment Offset", packet->fragment_off);
     ProtocolPrint(get_protocol(packet->protocol), packet->protocol);
     Print("Checksum", packet->checksum);
-    AddressPrint("Source Address", packet->source_address)
-    AddressPrint("Desination Address", packet->destination_addres);
+    IPv4AddressPrint("Source Address", packet->source_address)
+    IPv4AddressPrint("Desination Address", packet->destination_addres);
 }
 
