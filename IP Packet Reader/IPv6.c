@@ -1,12 +1,13 @@
-//
-//  IPv6.c
-//  IP Packet Reader
-//
-//  Created by Justin Sostre on 9/23/18.
-//  Copyright © 2018 Justin Sostre. All rights reserved.
-//
+///
+///  IPv6.c
+///  IP Packet Reader
+///
+///  Created by Justin Sostre on 9/23/18.
+///  Copyright © 2018 Justin Sostre. All rights reserved.
+///
 
 #include "IPv6.h"
+#include "protocol.h"
 
 #define IPv6_Header 40
 
@@ -21,34 +22,54 @@ static void address_parser(unsigned int *address, unsigned char *buffer, int i) 
 /// simplify_IPv6_address - turns the address into a char of hex.
 /// param packet - the pointer to the IPv6
 /// param address - the address pointer
-static void simplify_IPv6_address(char *address_string, unsigned int *address) {
+static void simplify_IPv6_address(unsigned char *address_string, unsigned int *address) {
+    int i = 0;
     
-    for (int i = 0; i < 16; i += 2) {
+    for (int j = 0; j < 16; j += 2) {
+        int compressed = 1;
         
-        int n = (address[0] << 8) | address[1];
-        while(n!=0) {
-            // temporary variable to store remainder
-            int temp  = 0;
-            
-            // storing remainder in temp variable.
-            temp = n % 16;
-            
-            // check if temp < 10
-            if(temp < 10) {
-                address_string[i] = temp + 48;
-                i++;
+        int n = (address[j] << 8) | address[j+1];
+        if (n == 0 && j != 14 && compressed) {
+            int m = (address[j+2] << 8) | address[j+3];
+            if (m == 0) {
+                j += 4;
+                for (int k = j; j < 16; j += 2) {
+                    int b = (address[k] << 8) | address[k+1];
+                    if (b != 0) {
+                        j = k-2;
+                        k = 16;
+                    }
+                }
+                address[i] = ':';
+                compressed = 0;
+            } else {
+                address_string[i] = '0';
+                address_string[i+1] = ':';
+                i += 2;
             }
-            else {
-                address_string[i] = temp + 55;
-                i++;
+        } else {
+            while(n != 0) {
+                // temporary variable to store remainder
+                int temp  = 0;
+                
+                // storing remainder in temp variable.
+                temp = n % 16;
+                
+                // check if temp < 10
+                if(temp < 10) {
+                    address_string[i] = temp + 48;
+                    i++;
+                }
+                else {
+                    address_string[i] = temp + 55;
+                    i++;
+                }
+                n = n/16;
             }
-            n = n/16;
+            address_string[i] = ':';
+            i++;
         }
-        address_string[i] = ':';
-        i++;
     }
-    
-        
 }
 
 void create_IPv6_packet(IPv6_Packet *packet, FILE *file, int8_t byte) {
@@ -64,5 +85,11 @@ void create_IPv6_packet(IPv6_Packet *packet, FILE *file, int8_t byte) {
     
     address_parser(packet->source_address, buffer, 7);
     address_parser(packet->source_address, buffer, 23);
+    
+    simplify_IPv6_address(packet->source_string, packet->source_address);
+    simplify_IPv6_address(packet->destination_string, packet->destination_address);
+}
 
+void print_IPv6_packet(IPv6_Packet *packet) {
+    
 }
