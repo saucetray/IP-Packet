@@ -38,6 +38,11 @@ void print_IPv4_packet(IPv4_Packet *packet);
 /// param packet - pointer to the packet struct
 /// param file - pointer to the file
 /// param ihl - the internet header length
-void create_IPv4_packet_file(IPv4_Packet *packet, FILE *file, int8_t version);
+void create_IPv4_packet(IPv4_Packet *packet, FILE *file, int8_t version);
+
+/// create_IPv4_packets - creates IPv4 packets with randomized values
+/// param amount - the amount of packets to create
+/// param file - pointer to the file being written with the file
+void create_IPv4_packets(int amount, FILE *file);
 
 #endif /* IPv4_h */

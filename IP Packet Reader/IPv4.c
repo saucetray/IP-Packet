@@ -73,3 +73,16 @@ void print_IPv4_packet(IPv4_Packet *packet) {
     IPv4AddressPrint("Desination Address", packet->destination_addres);
 }
 
+
+void create_IPv4_packets(int amount, FILE *file) {
+    for(int i = 0; i < amount; i++) {
+        IPv4_Packet packet;
+        packet.version = 4;
+        packet.IHL = 5;
+        packet.TOS = 0;
+        packet.TTL = 20 + rand() % (65615 - 0 + 1);
+        packet.ID = 0;
+    }
+}
+
+
