@@ -24,6 +24,7 @@
 
 #include <stdio.h>
 
+/// IPv6_Packet - structure to hold IPv6 packet data
 typedef struct {
     unsigned int version: 4, traffic_class: 8, flow_label: 20;
     unsigned int payload_length: 16, next_header: 8, hop_limit: 8;
@@ -31,8 +32,14 @@ typedef struct {
     unsigned char source_string[40], destination_string[40];
 } IPv6_Packet;
 
+/// create_IPv6_packet - parses the packet data into an IPv6_Packet struct
+/// param packet - pointer to the packet struct
+/// param file - pointer to the file
+/// param byte - the first byte already read from the file
 void create_IPv6_packet(IPv6_Packet *packet, FILE *file, int8_t byte);
 
+/// print_IPv6_packet - prints the IPv6 packet
+/// param packet - pointer to the packet being printed
 void print_IPv6_packet(IPv6_Packet *packet);
 
 #endif /* IPv6_h */
