@@ -21,13 +21,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/// IPv4_Packet - struct that 
+/// IPv4_Packet - structure to hold IPv4 packet data
 typedef struct {
-    unsigned int version: 4, IHL: 4,
-                 TOS: 8, total_length: 16, ID: 16,
-                 Flags: 3, fragment_off: 13,
-                 TTL: 8, protocol: 8, checksum: 16;
-    unsigned int source_address[4], destination_addres[4];
+    unsigned int version: 4,     // IP version (4 for IPv4)
+                 IHL: 4,         // Internet Header Length (in 32-bit words)
+                 TOS: 8,         // Type of Service
+                 total_length: 16, // Total Length of the packet
+                 ID: 16,         // Identification
+                 Flags: 3,       // Flags for fragmentation
+                 fragment_off: 13, // Fragment Offset
+                 TTL: 8,         // Time to Live
+                 protocol: 8,    // Protocol
+                 checksum: 16;   // Header Checksum
+    unsigned int source_address[4], destination_address[4]; // Source and destination IP addresses
 } IPv4_Packet;
 
 /// print_IPv4_packet - prints the IPv4 packet
@@ -37,8 +43,8 @@ void print_IPv4_packet(IPv4_Packet *packet);
 /// create_IPv4_packet_file - parses the packet data into a IPv4_Packet struct
 /// param packet - pointer to the packet struct
 /// param file - pointer to the file
-/// param ihl - the internet header length
-void create_IPv4_packet(IPv4_Packet *packet, FILE *file, int8_t version);
+/// param ihl - the first byte already read from the file
+void create_IPv4_packet_file(IPv4_Packet *packet, FILE *file, int8_t version);
 
 /// create_IPv4_packets - creates IPv4 packets with randomized values
 /// param amount - the amount of packets to create

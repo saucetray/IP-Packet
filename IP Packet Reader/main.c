@@ -16,7 +16,7 @@
 
 
 #define USAGE printf("./main [packet files]\n");
-#define VERSION(version) ((0xF0 & version) >> 4);
+#define VERSION(version) ((0xF0 & version) >> 4)
 
 
 /// main - parses the packet files
@@ -26,7 +26,7 @@ int main(int argc, const char * argv[]) {
     int8_t byte;
     int8_t version;
     
-    if (argc < 1) {
+    if (argc < 2) {
         USAGE;
         return 1;
     }
@@ -37,8 +37,13 @@ int main(int argc, const char * argv[]) {
     
     for(int i = 1; i < argc; i++) {
         FILE *file = fopen(argv[i], "r");
+        if (file == NULL) {
+            fprintf(stderr, "Error: Could not open file %s\n", argv[i]);
+            continue;
+        }
+        
         while ((fread(&byte, 1, 1, file))) {
-            version = VERSION(byte)
+            version = VERSION(byte);
             // hand over to IPv4 or IPv6
             if(version == 4) {
                 IPv4_Packet packet;
@@ -47,12 +52,14 @@ int main(int argc, const char * argv[]) {
             } else if(version == 6) {
                 IPv6_Packet packet;
                 create_IPv6_packet(&packet, file, byte);
+                print_IPv6_packet(&packet);
             } else {
-                perror("This is not a packet. This program strictly takes packets.\n");
-                return 3;
+                fprintf(stderr, "Error: This is not a valid IP packet (version %d). This program strictly takes IPv4 or IPv6 packets.\n", version);
+                break;
             }
         }
+        
+        fclose(file);
     }
     return 0;
 }
-
